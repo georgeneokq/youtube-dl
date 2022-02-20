@@ -1,0 +1,26 @@
+section[role=main] {
+    padding: 15px;
+}
+
+h1, p {
+    margin-bottom: 15px;
+}
+
+p {
+    text-align: center;
+}
+
+form td:not(:last-child) {
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+form input {
+    width: 15rem;
+    height: 2.5rem;
+    padding: 5px;
+}
+
+input[type=submit] {
+    margin-top: 15px;
+}

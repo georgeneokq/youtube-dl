@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube DL</title>
+
+    
+    <link rel="stylesheet" href="static/css/common.css">
+    <link rel="stylesheet" href="static/css/reset.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+</head>
+<body>
+    <section role="main" class="flex-center">
+        <h1>Youtube ダウンロード</h1>
+
+        <p>
+            スタート時刻はデフォルトで00:00:00。
+            <br>
+            エンド時刻はデフォルトで動画の最後まで。
+        </p>
+        
+        <form>
+            <table>
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td>リンク</td>
+                        <td><input type="text" name="link" placeholder="https://youtu.be/tQJ..."></td>
+                    </tr>
+                    <tr>
+                        <td>スタート時刻</td>
+                        <td><input type="text" name="start_timestamp" placeholder="00:00:00"></td>
+                    </tr>
+                    <tr>
+                        <td>エンド時刻</td>
+                        <td><input type="text" name="stop_timestamp"></td>
+                    </tr>
+                    <tr>
+                        <td>ファイル名</td>
+                        <td><input type="text" name="file_name" value="youtube_download"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="ダウンロード開始" class="right">
+        </form>
+    </section>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

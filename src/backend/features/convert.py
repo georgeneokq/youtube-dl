@@ -8,9 +8,7 @@ from mutagen.easyid3 import EasyID3
 from ..utils import sanitize_filename
 
 class InvalidLinkError(Exception):
-    def __init__(self, msg):
-        super(msg)
-
+    pass
 
 def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destination_folder: str):
     print(f'Converting from link {link}')

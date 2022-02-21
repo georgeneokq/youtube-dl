@@ -1,6 +1,6 @@
 from flask import Flask, request
 from os import path
-from backend.features.convert import convert_audio
+from backend.features.convert import InvalidLinkError, convert_audio
 
 def declare_api_routes(app: Flask):
     @app.route('/api/convert/audio', methods=['POST'])
@@ -11,7 +11,7 @@ def declare_api_routes(app: Flask):
         destination = path.join(app.root_path, '..', 'storage', 'audio')
         try:
             info = convert_audio(link, start_timestamp, end_timestamp, destination)
-        except Exception as e:
+        except InvalidLinkError as e:
             return {'error': str(e)}, 422  # Unprocessible entity
 
         return {

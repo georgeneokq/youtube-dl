@@ -79,7 +79,7 @@ function enableStartDownloadButton() {
             response = await response.json();
 
         } catch(e) {
-            
+            console.log(e);
         }
 
         hideSpinner();
@@ -94,7 +94,11 @@ function enableStartDownloadButton() {
             Swal.fire('不明なエラーが発生しました。');
         }
         else {
-            console.log(response.status);
+            if(response.error) {
+                Swal.fire('リンクが正しいことを確認してください。');
+                return;
+            }
+
             const title = response.title;
             const downloadLink = response.link;
     

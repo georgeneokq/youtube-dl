@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youtube DL</title>
-
     
     <link rel="stylesheet" href="static/css/common.css">
     <link rel="stylesheet" href="static/css/reset.css">
@@ -35,14 +34,26 @@
                     </tr>
                     <tr>
                         <td>エンド時刻</td>
-                        <td><input type="text" name="stop_timestamp"></td>
+                        <td><input type="text" name="end_timestamp"></td>
                     </tr>
                 </tbody>
             </table>
             <input type="submit" value="ダウンロード開始" class="right">
         </form>
+
+        <img src="static/img/spinner.gif" id="spinner" width="50" height="50">
+
+        <div class="ready-download-container">
+            <h2 id="download-title"></h2>
+            <a id="download-link">
+                <button class="btn">
+                    ダウンロード
+                </button>
+            </a>
+        </div>
     </section>
 
-    <script src="js/index.js"></script>
+    <script src="static/js/sweetalert2@11.js"></script>
+    <script src="static/js/index.js"></script>
 </body>
 </html>

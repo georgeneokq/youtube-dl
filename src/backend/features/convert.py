@@ -7,6 +7,11 @@ from yt_dlp import YoutubeDL
 from mutagen.easyid3 import EasyID3
 from ..utils import sanitize_filename
 
+class InvalidLinkError(Exception):
+    def __init__(self, msg):
+        super(msg)
+
+
 def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destination_folder: str):
     print(f'Converting from link {link}')
 
@@ -34,7 +39,7 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
         try:
             info = ytdl.extract_info(link)
         except:
-            raise Exception('Invalid link')
+            raise InvalidLinkError('Invalid link')
             
         title = info.get('title')
         artist = info.get('artist')
@@ -72,10 +77,13 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
         move(file_path, file_path_with_ext)
 
     # Add metadata
-    metatag = EasyID3(file_path_with_ext)
-    metatag['title'] = title
-    metatag['artist'] = artist
-    metatag.save()
+    try:
+        metatag = EasyID3(file_path_with_ext)
+        metatag['title'] = title
+        metatag['artist'] = artist
+        metatag.save()
+    except:
+        pass
 
     # Delete the file before it was trimmed: the one without extension
     if path.exists(file_path):

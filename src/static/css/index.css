@@ -1,3 +1,15 @@
+body {
+    background-image: url('/static/img/background.jpg');
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+section[role=main] {
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 section[role=main] > * {
     margin: 15px 0;
     padding: 0 15px;
@@ -24,6 +36,11 @@ form input {
 
 input[type=submit] {
     margin-top: 15px;
+}
+
+.brand {
+    font-style: italic;
+    font-weight: normal;
 }
 
 .ready-download-container {

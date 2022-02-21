@@ -2,6 +2,7 @@
 Check if venv folder is created
 """
 
+from tempfile import gettempdir
 from os.path import exists
 from os import makedirs, path
 from subprocess import run
@@ -10,7 +11,7 @@ from pathlib import Path
 from utils import ensure_root
 
 # Folder to place files download from youtube
-downloads_folder = path.join(Path(__file__).parent, '..', 'storage')
+downloads_folder = path.join(gettempdir(), 'kanade')
 
 def create_directories():
     # Create directories to hold created files

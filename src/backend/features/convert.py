@@ -1,7 +1,6 @@
 from hashlib import md5
 from os import path
 from yt_dlp import YoutubeDL
-from pprint import pprint
 
 # def progress_hook(d):
     # pprint(d)
@@ -19,7 +18,6 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
             'preferredquality': '320',
         }],
         'outtmpl': path.join(destination_folder, f'{hash}_%(title)s'),
-        # 'progress_hooks': [progress_hook]
     }
     print(opts)
 

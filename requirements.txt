@@ -4,6 +4,9 @@ Flask==2.0.3
 itsdangerous==2.1.0
 Jinja2==3.0.3
 MarkupSafe==2.1.0
+mutagen==1.45.1
+pycryptodomex==3.14.1
 python-dotenv==0.19.2
+websockets==10.1
 Werkzeug==2.0.3
-youtube-dl==2021.12.17
+yt-dlp==2022.2.4

@@ -8,5 +8,5 @@ def declare_web_routes(app: Flask):
 
     @app.route('/download/<media_type>/<file_name>')
     def route_download_audio(media_type, file_name):
-        file_path = path.join(app.root_path, '../storage', media_type, file_name)
+        file_path = path.join(app.root_path, '..', 'storage', media_type, file_name)
         return send_file(file_path, as_attachment=True)

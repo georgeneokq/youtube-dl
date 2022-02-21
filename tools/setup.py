@@ -10,7 +10,7 @@ from pathlib import Path
 from utils import ensure_root
 
 # Folder to place files download from youtube
-downloads_folder = path.join(Path(__file__).parent, '../storage')
+downloads_folder = path.join(Path(__file__).parent, '..', 'storage')
 
 def create_directories():
     # Create directories to hold created files

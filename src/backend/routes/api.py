@@ -9,7 +9,7 @@ def declare_api_routes(app: Flask):
         link = request.json.get('link')
         start_timestamp = request.json.get('start_timestamp')
         end_timestamp = request.json.get('end_timestamp')
-        destination = path.join(app.root_path, '../storage', 'audio')
+        destination = path.join(app.root_path, '..', 'storage', 'audio')
         info = convert_audio(link, start_timestamp, end_timestamp, destination)
 
         return {'error': 0, **info}

@@ -49,10 +49,6 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
         thumbnail = info.get('thumbnail')
         duration = info.get('duration')
         duration_string = info.get('duration_string')
-        
-        from pprint import pprint
-        with open('test', 'w', encoding='utf-8') as fil:
-            pprint(info, fil)
     
     # YoutubeDL automatically puts mp3 extension
     file_path = path.join(destination_folder, f'{file_name}.mp3')
@@ -76,6 +72,8 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
         command_trim = f'ffmpeg -ss {start_timestamp} -to {end_timestamp} -i "{file_path}" "{file_path_with_ext}"'
     elif start_timestamp:
         command_trim = f'ffmpeg -ss {start_timestamp} -i "{file_path}" "{file_path_with_ext}"'
+    elif end_timestamp:
+        command_trim = f'ffmpeg -ss 00:00:00 -to {end_timestamp} -i "{file_path}" "{file_path_with_ext}"'
 
     # The mp3 extension is added here
     if command_trim != '':

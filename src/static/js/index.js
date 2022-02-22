@@ -73,6 +73,11 @@ function enableStartDownloadButton() {
             return;
         }
 
+        if(startTimestamp && endTimestamp && startTimestamp > endTimestamp) {
+            Swal.fire('指定したスタート時間はエンド時間より大きい数値です。');
+            return;
+        }
+
         disableStartDownloadButton();
         hideDownload();
         showSpinner();

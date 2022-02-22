@@ -84,24 +84,18 @@ function enableStartDownloadButton() {
         hideDownload();
         showSpinner();
 
-        let response;
-        try {
-            response = await fetch('/api/convert/audio', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    link,
-                    start_timestamp: startTimestamp ?? null,
-                    end_timestamp: endTimestamp ?? null
-                })
-            });
-            response = await response.json();
-
-        } catch(e) {
-            console.log(e);
-        }
+        const response = await fetch('/api/convert/audio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                link,
+                start_timestamp: startTimestamp ?? null,
+                end_timestamp: endTimestamp ?? null
+            })
+        });
+        const responseBody = await response.json();
 
         hideSpinner();
         enableStartDownloadButton();
@@ -109,18 +103,13 @@ function enableStartDownloadButton() {
         // Check if any error occured.
         // 422: Input error, probably invalid youtube link
         if(response.status === 422) {
-            Swal.fire('リンクが正しいことを確認してください。');
+            Swal.fire('入力データを再確認してください。');
         }
         else if(response.status === 400) {
             Swal.fire('不明なエラーが発生しました。');
         }
         else {
-            if(response.error) {
-                Swal.fire('リンクが正しいことを確認してください。');
-                return;
-            }
-    
-            serveDownload(response);
+            serveDownload(responseBody);
         }
     }
 })();

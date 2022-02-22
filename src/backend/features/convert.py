@@ -2,12 +2,15 @@ from hashlib import md5
 from os import path, remove
 from shutil import move
 from time import time
-from subprocess import run
+from subprocess import CalledProcessError, run
 from yt_dlp import YoutubeDL
 from mutagen.easyid3 import EasyID3
 from ..utils import sanitize_filename, timestamp_to_seconds, seconds_to_timestamp
 
 class InvalidLinkError(Exception):
+    pass
+
+class BadParamError(Exception):
     pass
 
 def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destination_folder: str):
@@ -79,7 +82,13 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
     if command_trim != '':
         print(f'Command: {command_trim}')
         process = run(command_trim, shell=True, encoding='utf-8', capture_output=True)
-        print(process.stderr)
+        print(f'ffmpeg stderr:\n{process.stderr}')
+        print(f'ffmpeg stdout:\n{process.stdout}')
+        try:
+            process.check_returncode()
+        except CalledProcessError:
+            raise BadParamError('Bad parameter passed to ffmpeg')
+            
     else:
         move(file_path, file_path_with_ext)
 

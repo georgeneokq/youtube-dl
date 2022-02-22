@@ -36,6 +36,7 @@ form input {
 
 input[type=submit] {
     margin-top: 15px;
+    background: limegreen;
 }
 
 .brand {

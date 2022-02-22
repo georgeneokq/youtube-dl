@@ -1,12 +1,26 @@
-function serveDownload(title, link) {
+async function sleep(seconds) {
+    return new Promise((resolve, _) => {
+        window.setTimeout(() => resolve(), seconds * 1000);
+    });
+}
+
+async function serveDownload(info) {
+    const { title, link, duration_string: duration, thumbnail } = info
+
     const readyDownloadContainerEl = document.querySelector('.ready-download-container');
     const downloadTitleEl = readyDownloadContainerEl.querySelector('#download-title');
     const downloadLinkEl = readyDownloadContainerEl.querySelector('#download-link');
+    const durationEl = readyDownloadContainerEl.querySelector('#duration');
+    const thumbnailEl = readyDownloadContainerEl.querySelector('#thumbnail');
 
     downloadTitleEl.innerText = title;
     downloadLinkEl.download = title;
     downloadLinkEl.href = link;
+    durationEl.innerText = `長さ：${duration}`;
+    thumbnailEl.src = thumbnail;
     readyDownloadContainerEl.style.display = 'flex';
+    await sleep(0.01);  // Workaround: Delay for abit so that the following scroll instruction works
+    readyDownloadContainerEl.scrollIntoView();
 }
 
 function hideDownload() {
@@ -98,11 +112,8 @@ function enableStartDownloadButton() {
                 Swal.fire('リンクが正しいことを確認してください。');
                 return;
             }
-
-            const title = response.title;
-            const downloadLink = response.link;
     
-            serveDownload(title, downloadLink);
+            serveDownload(response);
         }
     }
 })();

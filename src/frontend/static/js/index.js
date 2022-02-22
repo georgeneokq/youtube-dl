@@ -5,17 +5,19 @@ async function sleep(seconds) {
 }
 
 async function serveDownload(info) {
-    const { title, link, duration_string: duration, thumbnail } = info
+    const { title, link, artist, duration_string: duration, thumbnail } = info
 
     const readyDownloadContainerEl = document.querySelector('.ready-download-container');
     const downloadTitleEl = readyDownloadContainerEl.querySelector('#download-title');
     const downloadLinkEl = readyDownloadContainerEl.querySelector('#download-link');
+    const artistEl = readyDownloadContainerEl.querySelector('#artist');
     const durationEl = readyDownloadContainerEl.querySelector('#duration');
     const thumbnailEl = readyDownloadContainerEl.querySelector('#thumbnail');
 
     downloadTitleEl.innerText = title;
     downloadLinkEl.download = title;
     downloadLinkEl.href = link;
+    artistEl.innerText = `アーチスト：${artist ?? '-'}`;
     durationEl.innerText = `長さ：${duration}`;
     thumbnailEl.src = thumbnail;
     readyDownloadContainerEl.style.display = 'flex';

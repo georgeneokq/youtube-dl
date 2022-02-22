@@ -26,6 +26,7 @@ def ensure_virtualenv():
     # Ensure virtual env
     if not exists('venv'):
         print('Creating virtual environment.')
+        makedirs('venv')
         run('python -m venv venv')
 
 

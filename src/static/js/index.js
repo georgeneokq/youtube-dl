@@ -37,7 +37,7 @@ function enableStartDownloadButton() {
     const inputEndTimestamp = form.querySelector('[name=end_timestamp]');
 
     const timestampRegex = /^\d{2}:\d{2}:\d{2}$/;
-    
+
     form.onsubmit = async e => {
         e.preventDefault();
 

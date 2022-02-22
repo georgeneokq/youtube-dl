@@ -42,6 +42,12 @@ input[type=submit] {
 .brand {
     font-style: italic;
     font-weight: normal;
+    font-size: 1.8rem;
+}
+
+.brand-bold {
+    font-weight: bold;
+    font-size: 1.8rem;
 }
 
 .ready-download-container {

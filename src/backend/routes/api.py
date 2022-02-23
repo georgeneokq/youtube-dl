@@ -19,7 +19,7 @@ def declare_api_routes(app: Flask):
         link = request.json.get('link')
         start_timestamp = request.json.get('start_timestamp')
         end_timestamp = request.json.get('end_timestamp')
-        destination = path.join(gettempdir(), 'kanade', 'audio')
+        destination = path.join(app.root_path, getenv('STORAGE_DIR'), 'audio') or path.join(gettempdir(), 'kanade', 'audio')
         try:
             info = convert_audio(link, start_timestamp, end_timestamp, destination)
         except (InvalidLinkError, BadParamError) as e:

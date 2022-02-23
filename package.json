@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx pm2 start src/app.py",
-    "kill": "npx pm2 kill",
+    "start": "pm2 start src/app.py",
+    "kill": "pm2 kill",
     "stop": "npm run kill",
     "dev": "python src/app.py",
-    "deploy": "sudo npx pm2 start ./venv/bin/python src/app.py"
+    "dev-ubuntu": "sudo venv/bin/python src/app.py",
+    "deploy": "sudo pm2 start src/app.py --interpreter venv/bin/python"
   }
 }

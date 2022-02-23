@@ -1,7 +1,7 @@
 import logging
 from tempfile import gettempdir
 from flask import Flask, render_template, request, send_from_directory
-from os import path
+from os import path, getenv
 
 logger = logging.getLogger()
 
@@ -10,9 +10,9 @@ def declare_web_routes(app: Flask):
     def route_index():
         return render_template('index.html')
 
-    @app.route('/download/<media_type>/<file_name>')
+    @app.route('/download/audio/<file_name>')
     def route_download_audio(media_type, file_name):
-        storage_path = path.abspath(path.join(gettempdir(), 'kanade', media_type))
+        storage_path = path.abspath(path.join(app.root_path, getenv('STORAGE_DIR'), media_type) or path.join(gettempdir(), 'kanade', 'audio'))
         
         # Remove the hash, use the title as the file download name
         file_name_without_hash = ''.join(file_name.split('_')[1:])

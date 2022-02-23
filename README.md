@@ -31,6 +31,12 @@ pip install -r requirements.txt
 
 #### Ubuntu
 ```
+sudo apt install nodejs
+
+sudo apt install npm
+
+sudo npm install pm2 -g
+
 sudo apt install python3.9
 
 sudo apt install python3.9-venv

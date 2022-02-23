@@ -7,6 +7,6 @@
     "kill": "npx pm2 kill",
     "stop": "npm run kill",
     "dev": "python src/app.py",
-    "deploy": "sudo npx -y pm2 start ./venv/bin/python src/app.py"
+    "deploy": "sudo npx pm2 start ./venv/bin/python src/app.py"
   }
 }

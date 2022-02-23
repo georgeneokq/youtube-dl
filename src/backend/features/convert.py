@@ -1,3 +1,4 @@
+import logging
 from hashlib import md5
 from os import path, remove
 from shutil import move
@@ -7,6 +8,8 @@ from yt_dlp import YoutubeDL
 from mutagen.easyid3 import EasyID3
 from ..utils import sanitize_filename, timestamp_to_seconds, seconds_to_timestamp
 
+logger = logging.getLogger()
+
 class InvalidLinkError(Exception):
     pass
 
@@ -14,7 +17,7 @@ class BadParamError(Exception):
     pass
 
 def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destination_folder: str):
-    print(f'Converting from link {link}')
+    logger.info(f'Converting from link {link}')
 
     # Create md5 hash from the link to form a unique download link
     hash = md5(link.encode()).hexdigest()
@@ -34,7 +37,7 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
     }
 
     with YoutubeDL(opts) as ytdl:
-        print(f'Downloading from {link}...')
+        logger.info(f'Downloading from {link}...')
 
         # For now, assume that any error is due to invalid link.
         try:
@@ -80,10 +83,10 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
 
     # The mp3 extension is added here
     if command_trim != '':
-        print(f'Command: {command_trim}')
+        logger.info(f'Command: {command_trim}')
         process = run(command_trim, shell=True, encoding='utf-8', capture_output=True)
-        print(f'ffmpeg stderr:\n{process.stderr}')
-        print(f'ffmpeg stdout:\n{process.stdout}')
+        logger.info(f'ffmpeg stderr:\n{process.stderr}')
+        logger.info(f'ffmpeg stdout:\n{process.stdout}')
         try:
             process.check_returncode()
         except CalledProcessError:

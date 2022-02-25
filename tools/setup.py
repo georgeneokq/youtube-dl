@@ -18,7 +18,6 @@ log_folder = getenv('LOG_DIR') or 'logs'
 
 def create_directories():
     # Create directories to hold created files
-    print(storage_dir)
     Path(f'{storage_dir}/audio').mkdir(exist_ok=True, parents=True)
     Path(f'{storage_dir}/video').mkdir(exist_ok=True, parents=True)
     Path(f'{log_folder}').mkdir(exist_ok=True, parents=True)

@@ -21,7 +21,8 @@ def convert_audio(link: str, start_timestamp: str, end_timestamp: str, destinati
     logger.info(f'Converting from link {link}')
 
     timestamp_regex = '^\d{2}:\d{2}:\d{2}$'
-    if re.match(timestamp_regex, start_timestamp) is None or re.match(timestamp_regex, end_timestamp) is None:
+    if ((start_timestamp and re.match(timestamp_regex, start_timestamp) is None) or
+        (end_timestamp and re.match(timestamp_regex, end_timestamp) is None)):
         raise BadParamError('Timestamp malformed')
 
     # Create md5 hash from the link to form a unique download link

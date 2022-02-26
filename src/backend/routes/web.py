@@ -12,7 +12,7 @@ def declare_web_routes(app: Flask):
 
     @app.route('/download/audio/<file_name>')
     def route_download_audio(file_name):
-        storage_path = path.abspath(path.join(app.root_path, getenv('STORAGE_DIR'), 'audio') or path.join(gettempdir(), 'kanade', 'audio'))
+        storage_path = path.abspath(path.join(app.root_path, '..', getenv('STORAGE_DIR'), 'audio') or path.join(gettempdir(), 'kanade', 'audio'))
         
         # Remove the hash, use the title as the file download name
         file_name_without_hash = ''.join(file_name.split('_')[1:])

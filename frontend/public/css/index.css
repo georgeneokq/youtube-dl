@@ -1,16 +1,8 @@
 body {
-    background-image: url('/img/background.jpg');
+    background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    min-height: 100vh;
-    min-width: 100vw;
-}
-
-section[role=main] {
-    min-height: 100vh;
-    min-width: 100vw;
-    background-color: rgba(255, 255, 255, 0.5);
 }
 
 section[role=main] > * {
@@ -58,8 +50,8 @@ input[type=submit] {
     margin-top: 50px;
     padding: 15px;
     border: 2px dashed black;
+    display: flex;
     border-radius: 3px;
-    display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -71,7 +63,6 @@ input[type=submit] {
 }
 
 #spinner {
-    display: none;
     max-width: 70px;
     max-height: 70px;
 }
@@ -80,7 +71,7 @@ img#thumbnail {
     max-width: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     form td {
         display: block;
     }

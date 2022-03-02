@@ -15,11 +15,16 @@ logging.basicConfig(filename=log_filename, format=FORMAT)
 
 app = Flask(__name__,
         static_url_path='',
-        static_folder='frontend/static',
+        static_folder='frontend/dist',
         template_folder='frontend/templates')
 
 declare_web_routes(app)
 declare_api_routes(app)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=getenv('SERVER_PORT'))
+    port = getenv('SERVER_PORT')
+    print(f'Running server on port {port}')
+    app.run(host='0.0.0.0', port=port)
+
+
+# vim: set et ts=4 sw=4:

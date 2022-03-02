@@ -3,3 +3,5 @@ venv
 __pycache__/
 storage
 logs
+node_modules
+dist

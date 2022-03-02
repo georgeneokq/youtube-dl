@@ -20,6 +20,12 @@ cp .env.sample .env
 
 ### Install dependencies
 
+This project uses npm workspaces.
+
+To install an npm dependency, use the following syntax:
+
+`npm i --workspace <WORKSPACE> <PACKAGE> --save`
+
 #### Windows
 ```
 python tools/setup.py
@@ -64,7 +70,3 @@ npm run deploy
 ```
 npm run kill
 ```
-
-# Future plans
-- Restructure frontend to expand to other languages
-- Integrate a frontend framework, most probably React

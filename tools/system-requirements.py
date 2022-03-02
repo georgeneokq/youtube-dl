@@ -1,1 +1,1 @@
-# TODO: ENSURE FFMPEG ADDED TO PATH
+# TODO: Ensure ffmpeg, npm, pm2 installed

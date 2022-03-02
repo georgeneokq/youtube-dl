@@ -2,12 +2,14 @@
   "name": "kanade",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start src/app.py",
+    "start": "npm run build --prefix frontend && pm2 start app.py",
     "kill": "pm2 kill",
     "stop": "npm run kill",
-    "dev": "python src/app.py",
-    "dev-ubuntu": "sudo venv/bin/python src/app.py",
-    "deploy": "sudo pm2 start src/app.py --interpreter venv/bin/python"
-  }
+    "dev": "python tools/dev.py",
+    "dev-linux": "sudo venv/bin/python app.py",
+    "deploy": "npm run build --prefix frontend && sudo pm2 start app.py --interpreter venv/bin/python"
+  },
+  "workspaces": [
+    "frontend"
+  ]
 }

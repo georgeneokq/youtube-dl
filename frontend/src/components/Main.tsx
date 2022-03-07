@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { lazy, Suspense, useContext, useEffect, useRef, useState } from 'react'
 import Form from './Form'
-import ReadyDownload, { DownloadInfo } from './ReadyDownload'
+import { DownloadInfo } from './ReadyDownload'
 import strings from '../config/strings'
 import { globalContext } from '../App'
 
 import '../../public/css/reset.css'
 import '../../public/css/common.css'
 import '../../public/css/index.css'
+
+const ReadyDownload = lazy(() => import('./ReadyDownload'));
 
 export default function Main() {
 
@@ -30,7 +32,9 @@ export default function Main() {
       
       <Form setDownloadInfo={setDownloadInfo} />
 
-      <ReadyDownload downloadInfo={downloadInfo} />
+      <Suspense fallback='...'>
+        <ReadyDownload downloadInfo={downloadInfo} />
+      </Suspense>
 
       {/* For scrolling to bottom */}
       <div ref={bottomRef}></div>

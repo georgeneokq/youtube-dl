@@ -1,9 +1,10 @@
-import React, { Dispatch, SetStateAction, useContext, useState } from "react"
+import React, { Dispatch, lazy, SetStateAction, Suspense, useContext, useState } from "react"
 import { DownloadInfo } from "./ReadyDownload"
 import Swal from 'sweetalert2'
-import Spinner from "./Spinner"
 import strings from '../config/strings'
 import { globalContext } from '../App'
+
+const Spinner = lazy(() => import('./Spinner'))
 
 interface Props {
     setDownloadInfo: Dispatch<SetStateAction<DownloadInfo>>
@@ -11,7 +12,7 @@ interface Props {
 
 export default function Form({ setDownloadInfo }: Props) { 
 
-    const globalState = useContext(globalContext);
+    const globalState = useContext(globalContext)
     
     const [link, setLink] = useState<string>('')
     const [startTimestamp, setStartTimestamp] = useState<string>('')
@@ -19,35 +20,35 @@ export default function Form({ setDownloadInfo }: Props) {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     
     const submit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         
-        let errors = [];
+        let errors = []
 
         // Validate form
-        const timestampRegex = /^\d{2}:\d{2}:\d{2}$/;
+        const timestampRegex = /^\d{2}:\d{2}:\d{2}$/
 
         // validate data
         if(link === '') {
-            errors.push([...errors, strings[globalState.language].ERROR_INVALID_LINK]);
+            errors.push([...errors, strings[globalState.language].ERROR_INVALID_LINK])
         }
 
         if(
             (startTimestamp !== '' && !timestampRegex.test(startTimestamp)) ||
             (endTimestamp !== '' && !timestampRegex.test(endTimestamp))
         ) {
-            errors.push([...errors, strings[globalState.language].ERROR_INVALID_TIMESTAMP_FORMAT]);
+            errors.push([...errors, strings[globalState.language].ERROR_INVALID_TIMESTAMP_FORMAT])
         }
 
         if(startTimestamp && endTimestamp && startTimestamp > endTimestamp) {
-            errors.push([...errors, strings[globalState.language].ERROR_INVALID_TIMESTAMP_VALUES]);
+            errors.push([...errors, strings[globalState.language].ERROR_INVALID_TIMESTAMP_VALUES])
         }
 
         if(errors.length > 0) {
-            Swal.fire(errors.join('\n'));
-            return;
+            Swal.fire(errors.join('\n'))
+            return
         }
 
-        setIsSubmitting(true);
+        setIsSubmitting(true)
         const response = await fetch('/api/convert/audio', {
             method: 'POST',
             headers: {
@@ -58,26 +59,26 @@ export default function Form({ setDownloadInfo }: Props) {
                 start_timestamp: startTimestamp ?? null,
                 end_timestamp: endTimestamp ?? null
             })
-        });
-        const responseBody = await response.json();
+        })
+        const responseBody = await response.json()
 
         // Check for response status
         // 422: Input error, probably invalid youtube link
         switch(response.status) {
             case 422:
-                errors.push(strings[globalState.language].ERROR_HTTP_INVALID_DATA);
-                break;
+                errors.push(strings[globalState.language].ERROR_HTTP_INVALID_DATA)
+                break
             case 400:
-                errors.push(strings[globalState.language].ERROR_HTTP_UNKNOWN_ERROR);
-                break;
+                errors.push(strings[globalState.language].ERROR_HTTP_UNKNOWN_ERROR)
+                break
             default:
-                break;
+                break
         }
 
         if(errors.length > 0) {
-            Swal.fire(errors.join('\n'));
-            setIsSubmitting(false);
-            return;
+            Swal.fire(errors.join('\n'))
+            setIsSubmitting(false)
+            return
         }
 
         const downloadInfo: DownloadInfo = {
@@ -88,13 +89,13 @@ export default function Form({ setDownloadInfo }: Props) {
             thumbnailUrl: responseBody.thumbnail
         }
 
-        setDownloadInfo(downloadInfo);
+        setDownloadInfo(downloadInfo)
 
-        setLink('');
-        setStartTimestamp('');
-        setEndTimestamp('');
-        setIsSubmitting(false);
-        e.target.reset();
+        setLink('')
+        setStartTimestamp('')
+        setEndTimestamp('')
+        setIsSubmitting(false)
+        e.target.reset()
     }
 
     return (
@@ -140,7 +141,9 @@ export default function Form({ setDownloadInfo }: Props) {
                 </table>
                 <input type="submit" value={strings[globalState.language].START_DOWNLOAD} className="right" disabled={isSubmitting} />
             </form>
-            <Spinner show={isSubmitting} />
+            <Suspense fallback='...'>
+                <Spinner show={isSubmitting} />
+            </Suspense>
         </div>
 
     )

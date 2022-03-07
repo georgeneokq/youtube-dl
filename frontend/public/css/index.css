@@ -5,9 +5,8 @@ body {
     background-size: cover;
 }
 
-section[role=main] > * {
-    margin: 15px 0;
-    padding: 0 15px;
+section[role=main] > *:not(:last-child) {
+    margin-bottom: 15px;
 }
 
 h1, p {

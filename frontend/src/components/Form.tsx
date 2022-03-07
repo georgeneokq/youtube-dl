@@ -110,6 +110,7 @@ export default function Form({ setDownloadInfo }: Props) {
                                 <input type="text"
                                     name="link"
                                     placeholder="https://youtu.be/tQJ..."
+                                    value={link}
                                     onChange={e => setLink(e.target.value)}
                                     />
                             </td>
@@ -122,6 +123,7 @@ export default function Form({ setDownloadInfo }: Props) {
                                     name="start_timestamp"
                                     placeholder="00:00:00"
                                     autoComplete="off"
+                                    value={startTimestamp}
                                     onChange={e => setStartTimestamp(e.target.value)}
                                     />
                             </td>
@@ -133,6 +135,7 @@ export default function Form({ setDownloadInfo }: Props) {
                                 type="text"
                                 name="end_timestamp"
                                 autoComplete="off"
+                                value={endTimestamp}
                                 onChange={e => setEndTimestamp(e.target.value)}
                                 />
                             </td>

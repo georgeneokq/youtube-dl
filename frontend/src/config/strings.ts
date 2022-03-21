@@ -2,7 +2,30 @@
  * Keys starting with underscore like _LANGUAGE and _ISO are metadata,
  * to be used in code instead of displaying on UI
  */
-export default {
+export interface AppStrings {
+  _LANGUAGE: string
+  _ISO: string
+  LANGUAGE: string
+  BRAND_NAME: string
+  LABEL_START_TIMESTAMP: string
+  LABEL_END_TIMESTAMP: string
+  MAIN_PAGE_HELP: string
+  START_DOWNLOAD: string
+  DOWNLOAD   : string
+  URL        : string
+  ERROR_INVALID_LINK: string
+  ERROR_INVALID_TIMESTAMP_FORMAT: string
+  ERROR_INVALID_TIMESTAMP_VALUES: string
+  ERROR_HTTP_INVALID_DATA: string
+  ERROR_HTTP_UNKNOWN_ERROR: string
+}
+
+export interface SupportedLanguages {
+  ja: AppStrings
+  en: AppStrings
+}
+
+export const strings: SupportedLanguages = {
   ja: {
     _LANGUAGE: '日本語',
     _ISO: 'ja',

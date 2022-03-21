@@ -1,10 +1,25 @@
 import React, { useContext, useState } from "react";
 import Main from "./components/Main";
 import LanguageDropdown from "./components/LanguageDropdown";
-import strings from "./config/strings";
+import { strings } from "./config/strings";
+
+function getLanguage(): string {
+    if(localStorage.getItem('language'))
+        return localStorage.getItem('language')
+
+    // Search through user's preferred languages.
+    // If any one of them is a language supported by this app, use that language.
+    // Note that english could be 'en-US', 'en-GB', etc instead of just 'en'
+    for(const language of navigator.languages)
+        if(Object.keys(strings).includes(language))
+            return language
+    
+    // If none of the user's preferred languages are supported, default to 'en'
+    return 'en'
+}
 
 const defaultGlobalState = {
-    language: localStorage.getItem('language') ?? navigator.language
+    language: getLanguage()
 }
 
 export const globalContext = React.createContext(defaultGlobalState);

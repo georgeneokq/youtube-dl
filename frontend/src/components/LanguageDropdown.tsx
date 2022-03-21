@@ -1,5 +1,5 @@
 import React from "react";
-import strings from "../config/strings";
+import { strings } from "../config/strings";
 import { capitalize } from "../utils/strings";
 
 interface Props {

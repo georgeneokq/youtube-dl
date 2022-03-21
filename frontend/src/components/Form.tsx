@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useContext, useState } from "react"
 import { DownloadInfo } from "./ReadyDownload"
 import Swal from 'sweetalert2'
 import Spinner from "./Spinner"
-import strings from '../config/strings'
+import { strings } from '../config/strings'
 import { globalContext } from '../App'
 
 interface Props {

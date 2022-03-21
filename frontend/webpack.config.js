@@ -1,8 +1,8 @@
 const prod = process.env.NODE_ENV === 'production';
 
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path')
 
 module.exports = {
   mode: prod ? 'production' : 'development',
@@ -36,5 +36,8 @@ module.exports = {
       template: 'webpack-templates/react.html'
     }),
     new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      '__REACT_DEVTOOLS_GLOBAL_HOOK__': '({ isDisabled: true })'
+    }),
   ],
 };

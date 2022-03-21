@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Form from './Form'
 import ReadyDownload, { DownloadInfo } from './ReadyDownload'
-import strings from '../config/strings'
+import { strings } from '../config/strings'
 import { globalContext } from '../App'
 
 import '../../public/css/reset.css'

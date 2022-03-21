@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import strings from '../config/strings'
+import { strings } from '../config/strings'
 import { globalContext } from "../App";
 
 export interface DownloadInfo {
